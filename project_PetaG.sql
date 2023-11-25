@@ -1,8 +1,10 @@
-SELECT e.country, e.year, e2.year + 1 as year_prev, 
-    round( ( e.GDP - e2.GDP ) / e2.GDP * 100, 2 ) as GDP_growth,
-    round( ( e.population - e2.population ) / e2.population * 100, 2) as pop_growth_percent
-FROM economies e 
-JOIN economies e2 
-    ON e.country = e2.country 
-    AND e.year = e2.year + 1
-    AND e.YEAR < 2020
+SELECT
+    cp.category_code, cpc.name,
+    cp.region_code, CONCAT(YEAR(cp.date_from), '/', MONTH(cp.date_from)) AS year_and_month,
+    REPLACE(CONCAT(cp.value, ' Kč / ', cpc.price_value, ' ', cpc.price_unit), '.', ',') AS price,
+    RANK() OVER (PARTITION BY cp.category_code ORDER BY cp.value DESC) AS value_rank
+FROM czechia_price cp
+JOIN czechia_price_category cpc
+    ON cp.category_code = cpc.code
+ORDER BY value_rank, cp.value DESC;
+
