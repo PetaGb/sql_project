@@ -6,4 +6,3 @@ JOIN economies e2
     ON e.country = e2.country 
     AND e.year = e2.year + 1
     AND e.YEAR < 2020
-ORDER BY GDP_growth DESC 
