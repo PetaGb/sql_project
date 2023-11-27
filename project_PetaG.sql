@@ -1,20 +1,31 @@
-SELECT cpib.name,cp.value, cp.payroll_year
+CREATE TABLE  IF NOT EXISTS t_peter_gbelec_project_SQL_primary_final(
+WITH czechia_payroll_by_year  AS(
+SELECT cpib.name,
+		cp.value, 
+		cp.payroll_year
 FROM czechia_payroll cp JOIN czechia_payroll_industry_branch cpib 
 	ON cp.industry_branch_code = cpib.code 
 WHERE value_type_code = 5958
 	AND payroll_quarter = 4
 	AND calculation_code = 100
 	AND industry_branch_code IS NOT NULL 
-ORDER BY cp.payroll_year, cp.value 
-
-
-SELECT YEAR (date_to), name, round(avg(value),2 ) AS price
+ORDER BY cp.payroll_year, cp.value),
+czechia_price_by_year AS (
+SELECT YEAR (date_to) AS year,
+	   name, 
+	   round(avg(value),2 ) AS price 
 FROM czechia_price cp 
-JOIN  czechia_price_category cpc ON cp.category_code = cpc.code 
-GROUP BY YEAR (date_to)
-
-
-
+	JOIN  czechia_price_category cpc ON cp.category_code = cpc.code 
+GROUP BY name, YEAR (date_to))
+SELECT a.payroll_year AS YEAR,
+	   a.name AS industry_name,
+	   a.value AS average_salary,
+	   b.name AS food_name, 
+	   b.price
+FROM  czechia_payroll_by_year a LEFT JOIN czechia_price_by_year b 
+	ON a.payroll_year = b.YEAR
+WHERE b.name IS NOT NULL
+GROUP BY food_name, industry_name);
 
 
 
