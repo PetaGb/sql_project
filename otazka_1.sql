@@ -27,7 +27,7 @@ SELECT
 	name, 
 	COUNT(CASE WHEN status = 'Doesn´t grow' THEN 1 END) AS not_growing_years
 FROM industry_salary_status
-GROUP BY name 
+GROUP BY name;
 
 
 
