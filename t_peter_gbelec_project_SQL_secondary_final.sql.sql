@@ -1,3 +1,4 @@
+CREATE OR REPLACE TABLE t_peter_gbelec_project_SQL_secondary_final(
 SELECT 
     e.country,
     e.`year`,
@@ -8,6 +9,4 @@ JOIN economies e2
     and e.`year` = e2.`year` + 1
 WHERE e.country LIKE 'Czech%'
 AND e.year  BETWEEN 2005 AND 2017
-ORDER BY e.year DESC;
-
-
+ORDER BY e.year DESC);
