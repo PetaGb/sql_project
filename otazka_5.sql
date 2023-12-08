@@ -24,16 +24,21 @@ WITH salary_price_comparison AS (
 			ON t1.year_sum = t2.year_sum + 1
 		GROUP BY t1.year_sum) AS abc)
 	SELECT
-		s.current_year AS salary_price_year, 
-		s.salary_growth AS salary_growth,
-		s.food_price_growth,
-		t.YEAR AS gdp_prev_year,
-		t.gdp_growth AS gdp_growth
+		avg(s.salary_growth) AS average_salary_growth,
+		avg(s.food_price_growth) AS average_food_price_growth,
+		avg(t.gdp_growth) AS average_gdp_growth
 	FROM salary_price_comparison s
 	LEFT JOIN t_peter_gbelec_project_SQL_secondary_final t
-	ON s.prev_year = t.YEAR
-
-
-
-
-
+		ON s.prev_year = t.YEAR
+	WHERE t.gdp_growth > 5
+	UNION 
+	SELECT
+		avg(s.salary_growth) AS average_salary_growth,
+		avg(s.food_price_growth) AS average_food_price_growth,
+		avg(t.gdp_growth) AS average_gdp_growth
+	FROM salary_price_comparison s
+	LEFT JOIN t_peter_gbelec_project_SQL_secondary_final t
+		ON s.prev_year = t.YEAR
+	WHERE t.gdp_growth < 0
+	
+	
