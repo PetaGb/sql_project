@@ -1,3 +1,6 @@
+
+-- Discord nick: PeťaG (petag)
+
 -- Rostou v průběhu let mzdy ve všech odvětvích, nebo v některých klesají?
 
 
