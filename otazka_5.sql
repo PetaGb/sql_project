@@ -41,6 +41,6 @@ WITH salary_price_comparison AS (
 	FROM salary_price_comparison s
 	LEFT JOIN t_peter_gbelec_project_SQL_secondary_final t
 		ON s.prev_year = t.YEAR
-	WHERE t.gdp_growth < 0
+	WHERE t.gdp_growth < 0;
 	
 	
