@@ -25,7 +25,7 @@ SELECT a.payroll_year AS year_sum,
 FROM  czechia_payroll_by_year a LEFT JOIN czechia_price_by_year b 
 	ON a.payroll_year = b.YEAR
 WHERE b.name IS NOT NULL
-GROUP BY a.payroll_year, industry_name, food_name)
+GROUP BY a.payroll_year, industry_name, food_name);
 
 
 
