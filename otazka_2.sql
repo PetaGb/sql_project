@@ -10,4 +10,4 @@ SELECT
 FROM t_peter_gbelec_project_SQL_primary_final tpgpspf 
 WHERE year_sum IN (2006, 2018)
 	AND food_name IN ('Chléb konzumní kmínový', 'Mléko polotučné pasterované')
-GROUP BY food_name, year_sum 
+GROUP BY food_name, year_sum;
