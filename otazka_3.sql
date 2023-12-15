@@ -14,5 +14,10 @@ FROM
 	 GROUP BY food_name
 	 HAVING price_2006 IS NOT NULL) AS abc
 GROUP BY food_name
-ORDER BY avg_percentual_growth
-;
+ORDER BY avg_percentual_growth;
+
+
+
+
+
+
