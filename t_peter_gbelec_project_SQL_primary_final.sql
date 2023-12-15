@@ -1,8 +1,8 @@
 CREATE OR REPLACE TABLE t_peter_gbelec_project_SQL_primary_final(
 WITH czechia_payroll_by_year  AS(
 SELECT cpib.name,
-	   round(avg(cp.value), 0) AS salary,
-	   cp.payroll_year
+    round(avg(cp.value), 0) AS salary,
+    cp.payroll_year
 FROM czechia_payroll cp JOIN czechia_payroll_industry_branch cpib 
 	ON cp.industry_branch_code = cpib.code 
 WHERE value_type_code = 5958
@@ -11,8 +11,8 @@ WHERE value_type_code = 5958
 GROUP BY cpib.name, cp.payroll_year),
 czechia_price_by_year AS (
 SELECT YEAR(date_to) AS YEAR,
-	   name, 
-	   round(avg(value), 2) AS price
+    name,
+    round(avg(value), 2) AS price
 FROM czechia_price cp 
 	JOIN  czechia_price_category cpc ON cp.category_code = cpc.code 
 GROUP BY name, YEAR(date_to))
